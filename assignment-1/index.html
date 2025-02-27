@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Graphics Assignment-1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.4.2/aframe.min.js"></script>
+</head>
+<body>
+
+    <a-scene>
+        <!-- Assets -->
+        <a-assets>
+            <img src="./resources/textures/clear-sunny-sky.jpg" alt="clear-sunny-sky" id="outside-environment">
+            <img src="./resources/textures/Erba_01_TileMat_baseColor.jpg" id="grass" alt="grass">
+            <img src="./resources/textures/Passerella_Legno_TopMura_02_Mat_baseColor.jpg" alt="wall-of-building" id="wall">
+            <img src="./resources/textures/TexturesCom_FloorsCheckerboard0034_1_M.jpg" alt="Interior-wall" id="interior-wall">
+            <img src="./resources/textures/wood-texture.jpg" id="wood" alt="wood">
+            <img src="./resources/textures/floor-texture.jpg" id="floor" alt="floor">
+            <img src="./resources/textures/ceiling-texture.jpg" id="ceiling" alt="ceiling">
+            <img src="./resources/images.png" id="tin-texture" alt="tin texture">
+        </a-assets>
+
+        <!-- Main Room Box -->
+        <a-box width="10" height="6" depth="15" position="-2 1.5 -15" src="#wall" material="side: back; src: #wall"></a-box>
+
+        <!-- Interior Walls -->
+        <a-box width="0.2" height="6" depth="15" position="-7 1.5 -15" src="#interior-wall"></a-box>
+        <a-box width="0.2" height="6" depth="15" position="3 1.5 -15" src="#interior-wall"></a-box>
+        <a-box width="10" height="6" depth="0.2" position="-2 1.5 -22.5" src="#interior-wall"></a-box>
+
+        <!-- Floor inside the room -->
+        <a-plane width="10" height="15" position="-2 -1.5 -15" src="#floor" rotation="-90 0 0"></a-plane>
+
+        <!-- Ceiling -->
+        <a-box width="10" height="0.2" depth="15" position="-2 4.6 -15" src="#ceiling"></a-box>
+
+        <!-- Ground/Grass Plane -->
+        <a-plane src="#grass"
+                 height="6"
+                 depth="4"
+                 rotation="-90 0 0"
+                 scale="500 500"
+                 repeat="400 400"
+                 position="0 -1.5 -9">
+        </a-plane>
+
+        <!-- IMPROVED TABLE - Now positioned on the plane -->
+        <a-entity position="-3 -1.2 -15.5">
+            <!-- Tabletop with rounded edges -->
+            <a-cylinder 
+                radius="1.2" 
+                height="0.08" 
+                segments-radial="8" 
+                color="#8B4513" 
+                position="0 0.55 0"
+            ></a-cylinder>
+            
+            <!-- Decorative rim -->
+            <a-torus
+                radius="1.2"
+                radius-tubular="0.05"
+                segments-tubular="16"
+                segments-radial="16"
+                color="#654321"
+                position="0 0.51 0"
+                rotation="90 0 0"
+            ></a-torus>
+            
+            <!-- Center pedestal -->
+            <a-cylinder
+                radius="0.15"
+                height="1"
+                position="0 0 0"
+                color="#5D4037"
+            ></a-cylinder>
+            
+            <!-- Base -->
+            <a-cylinder
+                radius="0.6"
+                height="0.1"
+                position="0 -0.45 0"
+                color="#5D4037"
+            ></a-cylinder>
+            
+            <!-- TWO SMALL CYLINDERS ON THE TABLE -->
+            <!-- Cylinder 1 (Vase) -->
+            <a-entity position="-0.5 0.65 0.2">
+                <a-cylinder
+                    radius="0.1"
+                    height="0.3"
+                    color="#4169E1"
+                ></a-cylinder>
+                <!-- Flower stems -->
+                <a-cylinder
+                    radius="0.01"
+                    height="0.4"
+                    position="0.02 0.3 0"
+                    color="#006400"
+                ></a-cylinder>
+                <a-cylinder
+                    radius="0.01"
+                    height="0.5"
+                    position="-0.02 0.35 0.02"
+                    color="#006400"
+                ></a-cylinder>
+                <!-- Flower blooms -->
+                <a-sphere
+                    radius="0.05"
+                    position="0.02 0.5 0"
+                    color="#FF1493"
+                ></a-sphere>
+                <a-sphere
+                    radius="0.05"
+                    position="-0.02 0.6 0.02"
+                    color="#FF4500"
+                ></a-sphere>
+            </a-entity>
+            
+            <!-- Cylinder 2 (Candle) -->
+            <a-entity position="0.5 0.65 -0.3">
+                <a-cylinder
+                    radius="0.08"
+                    height="0.2"
+                    color="#F5F5DC"
+                ></a-cylinder>
+                <!-- Candle Wick -->
+                <a-cylinder
+                    radius="0.01"
+                    height="0.05"
+                    position="0 0.12 0"
+                    color="#000000"
+                ></a-cylinder>
+                <!-- Candle holder base -->
+                <a-cylinder
+                    radius="0.12"
+                    height="0.04"
+                    position="0 -0.11 0"
+                    color="#B87333"
+                ></a-cylinder>
+            </a-entity>
+            
+            <!-- NEW TIN ON THE TABLE - Now with proper texture -->
+            <a-entity position="0 0.65 0.4">
+                <!-- Tin body -->
+                <a-cylinder
+                    radius="0.15"
+                    height="0.18"
+                    material="src: #tin-texture; metalness: 0.7; roughness: 0.3"
+                ></a-cylinder>
+                
+                <!-- Tin rim -->
+                <a-torus
+                    radius="0.15"
+                    radius-tubular="0.01"
+                    segments-tubular="16"
+                    segments-radial="16"
+                    color="#707070"
+                    metalness="0.8"
+                    position="0 0.09 0"
+                    rotation="90 0 0"
+                ></a-torus>
+                
+                <!-- Tin lid -->
+                <a-cylinder
+                    radius="0.153"
+                    height="0.02"
+                    material="src: #tin-texture"
+                    position="0 0.1 0"
+                ></a-cylinder>
+                
+                <!-- Decorative line around tin -->
+                <a-torus
+                    radius="0.15"
+                    radius-tubular="0.002"
+                    segments-tubular="16"
+                    segments-radial="16"
+                    color="#606060"
+                    position="0 0 0"
+                    rotation="90 0 0"
+                ></a-torus>
+            </a-entity>
+            
+            <!-- NEW: Cup 1 - Left side of table -->
+            <a-entity position="-0.6 0.65 -0.4">
+                <!-- Cup body -->
+                <a-cylinder
+                    radius="0.07"
+                    radius-bottom="0.05"
+                    height="0.15"
+                    color="#FFFFFF"
+                    segments-radial="16"
+                ></a-cylinder>
+                
+                <!-- Cup inside (coffee or tea) -->
+                <a-cylinder
+                    radius="0.065"
+                    radius-bottom="0.045"
+                    height="0.02"
+                    position="0 0.06 0"
+                    color="#6F4E37"
+                ></a-cylinder>
+                
+                <!-- Cup handle -->
+                <a-entity position="0.07 0 0">
+                    <a-torus-knot
+                        p="1"
+                        q="1"
+                        radius="0.03"
+                        radius-tubular="0.01"
+                        segments-tubular="8"
+                        segments-radial="8"
+                        color="#FFFFFF"
+                        scale="1 0.9 0.2"
+                    ></a-torus-knot>
+                </a-entity>
+            </a-entity>
+
+            <!-- NEW: Cup 2 - Right side of table -->
+            <a-entity position="0.7 0.65 0.2">
+                <!-- Cup body -->
+                <a-cylinder
+                    radius="0.07"
+                    radius-bottom="0.05"
+                    height="0.15"
+                    color="#F5DEB3"
+                    segments-radial="16"
+                ></a-cylinder>
+                
+                <!-- Cup inside (coffee or tea) -->
+                <a-cylinder
+                    radius="0.065"
+                    radius-bottom="0.045"
+                    height="0.02"
+                    position="0 0.06 0"
+                    color="#6F4E37"
+                ></a-cylinder>
+                
+                <!-- Cup handle -->
+                <a-entity position="0.07 0 0">
+                    <a-torus-knot
+                        p="1"
+                        q="1"
+                        radius="0.03"
+                        radius-tubular="0.01"
+                        segments-tubular="8"
+                        segments-radial="8"
+                        color="#F5DEB3"
+                        scale="1 0.9 0.2"
+                    ></a-torus-knot>
+                </a-entity>
+            </a-entity>
+            
+            <!-- NEW: Milk Tin - Simplified to basic cylinder -->
+            <a-entity position="-0.2 0.65 -0.5">
+                <!-- Milk tin body - simple cylinder -->
+                <a-cylinder
+                    radius="0.08"
+                    height="0.16"
+                    color="#F0F0F0"
+                    metalness="0.3"
+                    roughness="0.4"
+                ></a-cylinder>
+            </a-entity>
+        </a-entity>
+
+        <!-- IMPROVED CHAIRS - Now positioned on the plane -->
+        <!-- Chair 1 (Front) -->
+        <a-entity position="-3 -1.5 -13.5" rotation="0 180 0">
+            <!-- Seat (curved for comfort) -->
+            <a-cylinder
+                radius="0.4"
+                height="0.08"
+                segments-radial="6"
+                position="0 0.5 0"
+                color="#A0522D"
+            ></a-cylinder>
+            
+            <!-- Backrest (curved) -->
+            <a-entity position="0 0.8 -0.35">
+                <a-cylinder
+                    radius="0.4"
+                    height="0.08"
+                    rotation="90 0 0"
+                    position="0 0.3 0"
+                    color="#A0522D"
+                ></a-cylinder>
+                <a-box
+                    width="0.8"
+                    height="0.6"
+                    depth="0.08"
+                    position="0 0 0"
+                    color="#A0522D"
+                ></a-box>
+                <!-- Decorative back slats -->
+                <a-box width="0.08" height="0.6" depth="0.04" position="-0.25 0 0.02" color="#8B4513"></a-box>
+                <a-box width="0.08" height="0.6" depth="0.04" position="0 0 0.02" color="#8B4513"></a-box>
+                <a-box width="0.08" height="0.6" depth="0.04" position="0.25 0 0.02" color="#8B4513"></a-box>
+            </a-entity>
+            
+            <!-- Legs -->
+            <a-cylinder radius="0.05" height="0.5" position="-0.3 0.25 0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="0.3 0.25 0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="-0.3 0.25 -0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="0.3 0.25 -0.3" color="#8B4513"></a-cylinder>
+        </a-entity>
+
+        <!-- Chair 2 (Back) -->
+        <a-entity position="-3 -1.5 -17.5" rotation="0 180 0">
+            <!-- Seat (curved for comfort) -->
+            <a-cylinder
+                radius="0.4"
+                height="0.08"
+                segments-radial="6"
+                position="0 0.5 0"
+                color="#A0522D"
+            ></a-cylinder>
+            
+            <!-- Backrest (curved) -->
+            <a-entity position="0 0.8 -0.35">
+                <a-cylinder
+                    radius="0.4"
+                    height="0.08"
+                    rotation="90 0 0"
+                    position="0 0.3 0"
+                    color="#A0522D"
+                ></a-cylinder>
+                <a-box
+                    width="0.8"
+                    height="0.6"
+                    depth="0.08"
+                    position="0 0 0"
+                    color="#A0522D"
+                ></a-box>
+                <!-- Decorative back slats -->
+                <a-box width="0.08" height="0.6" depth="0.04" position="-0.25 0 0.02" color="#8B4513"></a-box>
+                <a-box width="0.08" height="0.6" depth="0.04" position="0 0 0.02" color="#8B4513"></a-box>
+                <a-box width="0.08" height="0.6" depth="0.04" position="0.25 0 0.02" color="#8B4513"></a-box>
+            </a-entity>
+            
+            <!-- Legs -->
+            <a-cylinder radius="0.05" height="0.5" position="-0.3 0.25 0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="0.3 0.25 0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="-0.3 0.25 -0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="0.3 0.25 -0.3" color="#8B4513"></a-cylinder>
+        </a-entity>
+
+        <!-- Chair 3 (Left) -->
+        <a-entity position="-5 -1.5 -15.5" rotation="0 90 0">
+            <!-- Seat (curved for comfort) -->
+            <a-cylinder
+                radius="0.4"
+                height="0.08"
+                segments-radial="6"
+                position="0 0.5 0"
+                color="#A0522D"
+            ></a-cylinder>
+            
+            <!-- Backrest (curved) -->
+            <a-entity position="0 0.8 -0.35">
+                <a-cylinder
+                    radius="0.4"
+                    height="0.08"
+                    rotation="90 0 0"
+                    position="0 0.3 0"
+                    color="#A0522D"
+                ></a-cylinder>
+                <a-box
+                    width="0.8"
+                    height="0.6"
+                    depth="0.08"
+                    position="0 0 0"
+                    color="#A0522D"
+                ></a-box>
+                <!-- Decorative back slats -->
+                <a-box width="0.08" height="0.6" depth="0.04" position="-0.25 0 0.02" color="#8B4513"></a-box>
+                <a-box width="0.08" height="0.6" depth="0.04" position="0 0 0.02" color="#8B4513"></a-box>
+                <a-box width="0.08" height="0.6" depth="0.04" position="0.25 0 0.02" color="#8B4513"></a-box>
+            </a-entity>
+            
+            <!-- Legs -->
+            <a-cylinder radius="0.05" height="0.5" position="-0.3 0.25 0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="0.3 0.25 0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="-0.3 0.25 -0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="0.3 0.25 -0.3" color="#8B4513"></a-cylinder>
+        </a-entity>
+
+        <!-- Chair 4 (Right) -->
+        <a-entity position="-1 -1.5 -15.5" rotation="0 270 0">
+            <!-- Seat (curved for comfort) -->
+            <a-cylinder
+                radius="0.4"
+                height="0.08"
+                segments-radial="6"
+                position="0 0.5 0"
+                color="#A0522D"
+            ></a-cylinder>
+            
+            <!-- Backrest (curved) -->
+            <a-entity position="0 0.8 -0.35">
+                <a-cylinder
+                    radius="0.4"
+                    height="0.08"
+                    rotation="90 0 0"
+                    position="0 0.3 0"
+                    color="#A0522D"
+                ></a-cylinder>
+                <a-box
+                    width="0.8"
+                    height="0.6"
+                    depth="0.08"
+                    position="0 0 0"
+                    color="#A0522D"
+                ></a-box>
+                <!-- Decorative back slats -->
+                <a-box width="0.08" height="0.6" depth="0.04" position="-0.25 0 0.02" color="#8B4513"></a-box>
+                <a-box width="0.08" height="0.6" depth="0.04" position="0 0 0.02" color="#8B4513"></a-box>
+                <a-box width="0.08" height="0.6" depth="0.04" position="0.25 0 0.02" color="#8B4513"></a-box>
+            </a-entity>
+            
+            <!-- Legs -->
+            <a-cylinder radius="0.05" height="0.5" position="-0.3 0.25 0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="0.3 0.25 0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="-0.3 0.25 -0.3" color="#8B4513"></a-cylinder>
+            <a-cylinder radius="0.05" height="0.5" position="0.3 0.25 -0.3" color="#8B4513"></a-cylinder>
+        </a-entity>
+
+        <!-- Trees -->
+        <a-entity gltf-model="url(./resources/Tree/scene.gltf)" position="-12 -1 -15" scale="0.03 0.03 0.01"></a-entity>
+        <a-entity gltf-model="url(./resources/Tree/scene.gltf)" position="12 -1 -20" scale="0.03 0.03 0.01"></a-entity>
+
+        <!-- Sky -->
+        <a-sky src="#outside-environment"></a-sky>
+
+        <!-- Lighting -->
+        <a-light type="ambient" color="#BBB" intensity="0.5"></a-light>
+        <a-light type="directional" color="#FFF" intensity="0.6" position="-0.5 1 1"></a-light>
+        <a-light type="point" color="#FFF" intensity="0.4" position="-3 2 -15"></a-light>
+
+        <!-- Camera with controls -->
+        <a-entity position="0 1.6 0">
+            <a-camera look-controls wasd-controls></a-camera>
+        </a-entity>
+
+    </a-scene>
+
+</body>
+</html>
